@@ -16,7 +16,6 @@ public class UserController {
 
     @PostMapping(path = "")
     public UserCommonResponseDTO createUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
-        System.out.println("---------------------------- here ------------------------");
         return userService.createUser(userCreateDTO);
     }
 
@@ -26,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping(path = "")
-    public UserPaginatedDTO<UserResponseDTO> getUsers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+    public UserPaginatedDTO<UserResponseDTO> getUsers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10", name = "limit") int size) {
         return userService.getUsers(page, size);
     }
 
@@ -46,7 +45,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/search")
-    public UserPaginatedDTO<UserResponseDTO> searchUsers(@RequestParam(defaultValue = "") String keyword,@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+    public UserPaginatedDTO<UserResponseDTO> searchUsers(@RequestParam(defaultValue = "") String keyword,@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10", name = "limit") int size) {
         return userService.searchUsers(keyword, page, size);
     }
 }
