@@ -14,17 +14,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(path = "/")
+    @PostMapping(path = "")
     public UserCommonResponseDTO createUser(@Valid @RequestBody UserCreateDTO userCreateDTO) {
+        System.out.println("---------------------------- here ------------------------");
         return userService.createUser(userCreateDTO);
     }
 
-    @PutMapping(path = "/")
+    @PutMapping(path = "")
     public UserCommonResponseDTO updateUser(@Valid @RequestBody UserUpdateDTO userUpdateDTO) {
         return userService.updateUser(userUpdateDTO);
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "")
     public UserPaginatedDTO<UserResponseDTO> getUsers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
         return userService.getUsers(page, size);
     }
