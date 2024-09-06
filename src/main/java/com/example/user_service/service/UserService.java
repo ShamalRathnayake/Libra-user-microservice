@@ -47,7 +47,7 @@ public class UserService {
 
     }
 
-    public UserCommonResponseDTO updateUser(UserUpdateDTO userUpdateDTO) {
+    public UserCommonResponseDTO updateUser(UserUpdateDTO userUpdateDTO) throws UserNotFoundWIthIdException {
 
         Optional<User> existingUser = userRepository.findById(userUpdateDTO.getId());
 
@@ -98,7 +98,7 @@ public class UserService {
                 1);
     }
 
-    public UserCommonResponseDTO deleteUser(int userId) {
+    public UserCommonResponseDTO deleteUser(int userId) throws UserNotFoundWIthIdException {
         Optional<User> existingUser = userRepository.findById(userId);
 
         if (existingUser.isPresent()) {
@@ -113,7 +113,7 @@ public class UserService {
 
     }
 
-    public UserLoginResponseDTO login (String email, String password){
+    public UserLoginResponseDTO login (String email, String password) throws InvalidCredentialsException{
 
         Optional<User> userOptional = userRepository.findByEmail(email);
 
